@@ -1,6 +1,7 @@
 import React from "react";
 import Lottie from "react-lottie";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import ButtonArrow from "./ui/ButtonArrow";
@@ -126,7 +127,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function LandingPage() {
+export default function LandingPage(props) {
   const classes = useStyles();
   const theme = useTheme();
   const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
@@ -144,7 +145,7 @@ export default function LandingPage() {
   return (
     <Grid container direction="column" className={classes.mainContainer}>
       <Grid item>
-        {/*------Here Block ------*/}
+        {/*------Hero Block ------*/}
         <Grid container justify="flex-end" alignItems="center" direction="row">
           <Grid sm item className={classes.heroTextContainer}>
             <Typography variant="h2" align="center">
@@ -156,12 +157,24 @@ export default function LandingPage() {
               className={classes.buttonContainer}
             >
               <Grid item>
-                <Button className={classes.estimateButton} variant="contained">
+                <Button
+                  component={Link}
+                  to="/estimate"
+                  className={classes.estimateButton}
+                  variant="contained"
+                  onClick={() => props.setValue(5)}
+                >
                   Free Estimate
                 </Button>
               </Grid>
               <Grid item>
-                <Button variant="outlined" className={classes.learnButtonHero}>
+                <Button
+                  component={Link}
+                  to="/revolution"
+                  variant="outlined"
+                  className={classes.learnButtonHero}
+                  onClick={() => props.setValue(2)}
+                >
                   <span style={{ marginRight: 10 }}>Learn More</span>
                   <ButtonArrow
                     width={15}
@@ -180,85 +193,103 @@ export default function LandingPage() {
             ></Lottie>
           </Grid>
         </Grid>
-        <Grid item>
-          {/*-----Custom Software Block-----*/}
+      </Grid>
+      <Grid item>
+        {/*-----Custom Software Block-----*/}
+        <Grid
+          container
+          direction="row"
+          justify={matchesSM ? "center" : undefined}
+          className={classes.serviceContainer}
+        >
           <Grid
-            container
-            direction="row"
-            justify={matchesSM ? "center" : undefined}
-            className={classes.serviceContainer}
+            item
+            style={{
+              marginLeft: matchesSM ? 0 : "5em",
+              textAlign: matchesSM ? "center" : undefined,
+            }}
           >
-            <Grid
-              item
-              style={{
-                marginLeft: matchesSM ? 0 : "5em",
-                textAlign: matchesSM ? "center" : undefined,
+            <Typography variant="h4">Custom Software Development</Typography>
+            <Typography className={classes.subtitle} variant="subtitle1">
+              Save Energy. Save Time. Save Money
+            </Typography>
+            <Typography variant="subtitle1">
+              Complete digital solutions, from investigation to{" "}
+              <span className={classes.specialText}>celebration.</span>
+            </Typography>
+            <Button
+              component={Link}
+              to="/customsoftware"
+              variant="outlined"
+              className={classes.learnButton}
+              onClick={() => {
+                props.setValue(1);
+                props.setSelectedIndex(1);
               }}
             >
-              <Typography variant="h4">Custom Software Development</Typography>
-              <Typography className={classes.subtitle} variant="subtitle1">
-                Save Energy. Save Time. Save Money
-              </Typography>
-              <Typography variant="subtitle1">
-                Complete digital solutions, from investigation to{" "}
-                <span className={classes.specialText}>celebration.</span>
-              </Typography>
-              <Button variant="outlined" className={classes.learnButton}>
-                <span style={{ marginRight: 10 }}>Learn More</span>
-                <ButtonArrow
-                  width={10}
-                  height={10}
-                  fill={theme.palette.common.blue}
-                />
-              </Button>
-            </Grid>
-            <Grid item>
-              <img
-                className={classes.icon}
-                alt="custom software icon"
-                src={customSoftwareIcon}
+              <span style={{ marginRight: 10 }}>Learn More</span>
+              <ButtonArrow
+                width={10}
+                height={10}
+                fill={theme.palette.common.blue}
               />
-            </Grid>
+            </Button>
+          </Grid>
+          <Grid item>
+            <img
+              className={classes.icon}
+              alt="custom software icon"
+              src={customSoftwareIcon}
+            />
           </Grid>
         </Grid>
-        <Grid item>
-          {/*-----iOs/Android Block-----*/}
+      </Grid>
+      <Grid item>
+        {/*-----iOs/Android Block-----*/}
+        <Grid
+          container
+          direction="row"
+          justify={matchesSM ? "center" : "flex-end"}
+          className={classes.serviceContainer}
+        >
           <Grid
-            container
-            direction="row"
-            justify={matchesSM ? "center" : "flex-end"}
-            className={classes.serviceContainer}
+            item
+            style={{
+              textAlign: matchesSM ? "center" : undefined,
+            }}
           >
-            <Grid
-              item
-              style={{
-                textAlign: matchesSM ? "center" : undefined,
+            <Typography variant="h4">iOS/Android App Development</Typography>
+            <Typography className={classes.subtitle} variant="subtitle1">
+              Extend Functionality. Extend Access. Increase Engagement.
+            </Typography>
+            <Typography variant="subtitle1">
+              Integrate your web experience or create standalone
+              {matchesSM ? null : <br />} with either mobile platform
+            </Typography>
+            <Button
+              component={Link}
+              to="/mobileapps"
+              variant="outlined"
+              className={classes.learnButton}
+              onClick={() => {
+                props.setValue(1);
+                props.setSelectedIndex(2);
               }}
             >
-              <Typography variant="h4">iOS/Android App Development</Typography>
-              <Typography className={classes.subtitle} variant="subtitle1">
-                Extend Functionality. Extend Access. Increase Engagement.
-              </Typography>
-              <Typography variant="subtitle1">
-                Integrate your web experience or create standalone
-                {matchesSM ? null : <br />} with either mobile platform
-              </Typography>
-              <Button variant="outlined" className={classes.learnButton}>
-                <span style={{ marginRight: 10 }}>Learn More</span>
-                <ButtonArrow
-                  width={10}
-                  height={10}
-                  fill={theme.palette.common.blue}
-                />
-              </Button>
-            </Grid>
-            <Grid item style={{ marginRight: matchesSM ? 0 : "5em" }}>
-              <img
-                className={classes.icon}
-                alt="mobile phone icon"
-                src={mobileAppsIcon}
+              <span style={{ marginRight: 10 }}>Learn More</span>
+              <ButtonArrow
+                width={10}
+                height={10}
+                fill={theme.palette.common.blue}
               />
-            </Grid>
+            </Button>
+          </Grid>
+          <Grid item style={{ marginRight: matchesSM ? 0 : "5em" }}>
+            <img
+              className={classes.icon}
+              alt="mobile phone icon"
+              src={mobileAppsIcon}
+            />
           </Grid>
         </Grid>
       </Grid>
@@ -284,7 +315,16 @@ export default function LandingPage() {
             <Typography variant="subtitle1">
               Optimized for Search Engines, built for speed
             </Typography>
-            <Button variant="outlined" className={classes.learnButton}>
+            <Button
+              component={Link}
+              to="/websites"
+              variant="outlined"
+              className={classes.learnButton}
+              onClick={() => {
+                props.setValue(1);
+                props.setSelectedIndex(3);
+              }}
+            >
               <span style={{ marginRight: 10 }}>Learn More</span>
               <ButtonArrow
                 width={10}
@@ -329,8 +369,11 @@ export default function LandingPage() {
                     recipe for revolution
                   </Typography>
                   <Button
+                    component={Link}
+                    to="/revolution"
                     variant="outlined"
                     className={classes.learnButtonHero}
+                    onClick={() => props.setValue(2)}
                   >
                     <span style={{ marginRight: 10 }}>Learn More</span>
                     <ButtonArrow
@@ -347,22 +390,22 @@ export default function LandingPage() {
         </Grid>
       </Grid>
       <Grid item>
-        {/*-----revolution Block-----*/}
+        {/*-----Information Block-----*/}
         <Grid
           container
           style={{ height: "80em" }}
           alignItems="center"
           direction="row"
+          className={classes.infoBackground}
         >
           <Grid
             item
             container
             style={{
-              position: "absolute",
               textAlign: matchesXS ? "center" : "inherit",
             }}
             direction={matchesXS ? "column" : "row"}
-            spacing={matchesXS ? 10 : 0}
+            justify={matchesXS ? "center" : "undefined"}
           >
             <Grid
               item
@@ -371,16 +414,23 @@ export default function LandingPage() {
                 marginLeft: matchesXS ? undefined : matchesSM ? "2em" : "5em",
               }}
             >
-              <Grid container direction="column">
+              <Grid
+                container
+                style={{ marginBottom: matchesXS ? "10em" : 0 }}
+                direction="column"
+              >
                 <Typography variant="h2" style={{ color: "white" }}>
                   About Us
                 </Typography>
                 <Typography variant="subtitle2">Let's get personal.</Typography>
                 <Grid item>
                   <Button
+                    component={Link}
+                    to="/about"
                     variant="outlined"
                     style={{ color: "white", borderColor: "white" }}
                     className={classes.learnButtonHero}
+                    onClick={() => props.setValue(3)}
                   >
                     <span style={{ marginRight: 10 }}>Learn More</span>
                     <ButtonArrow width={15} height={15} fill="white" />
@@ -408,9 +458,12 @@ export default function LandingPage() {
                 </Typography>
                 <Grid item>
                   <Button
+                    component={Link}
+                    to="/contact"
                     variant="outlined"
                     style={{ color: "white", borderColor: "white" }}
                     className={classes.learnButtonHero}
+                    onClick={() => props.setValue(4)}
                   >
                     <span style={{ marginRight: 10 }}>Learn More</span>
                     <ButtonArrow width={15} height={15} fill="white" />
@@ -419,12 +472,11 @@ export default function LandingPage() {
               </Grid>
             </Grid>
           </Grid>
-          <div className={classes.infoBackground} />
         </Grid>
       </Grid>
       <Grid item>
         {/*-----Call to Action Block-----*/}
-        <CallToAction></CallToAction>
+        <CallToAction setValue={props.setValue} />
       </Grid>
     </Grid>
   );
